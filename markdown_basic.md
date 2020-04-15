@@ -30,9 +30,24 @@ let num = Math.random()
 some paragraph with text
 >blockquote text below the paragraph
 
+<!-- creating a table -->
+
 | heading | header | head |
 | --- | ---| --- |
 | content | more content | text |
 | more | more | more |
 
-This is being *created* on **Wednesday** . 
+<!-- Horizontal line -->
+
+---
+___
+
+
+This is being *created* on **Wednesday** ~~Saturday~~. 
+
+<!-- Task List -->
+
+* [x] Task 1
+* [x] Task 2
+* [ ] Task 3
+
