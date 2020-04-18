@@ -44,4 +44,31 @@ dev_1 = Developer('Niti', 'Chauhan', 75000, 'Javascript')
 ```     
 super.__init__() method is going to pass first, last and pay to our
 Employees init method and let that class handle those arguments 
- 
+
+```python
+class Employee:
+    -----
+    -----
+
+class Manager(Employee):
+    # Note: Mutable data type such as list or dictionary should not be 
+    # passed as default arguments and hence None is passed here
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+    
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)  
+    def print_emps(self):
+        for emp in self.employees:
+            print('-->', emp.first)
+  
+```
