@@ -66,5 +66,5 @@ class Employee:
 
 print(emp_1 + emp_2)
 ```
-Note: `return notImplemented` is a way to fall back to other object to see
-if it knows how to handle this operation.
+Note: `return notImplemented` is a way to fall back to other object in the 
+class hierarchy to see if it knows how to handle this operation.
