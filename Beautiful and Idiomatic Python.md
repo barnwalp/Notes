@@ -157,12 +157,29 @@ for color in colors:
 #### Grouping with dictionaries
 ```python
 # Un-pythonic way
+names = ['ray', 'rach', 'matt', 'roger', 'betty', 'melissa', 'judy', 'charlie']
+
+d = {}
+for name in names:
+    key = len(name)
+    if key not in d:
+        d[key] = []
+    d[key].append(name)
 #Pythonic Way
+d = defaultdict(list)
+
+for name in names:
+    key = len(name)
+    d[key].append(name)
 ```
 #### Is a dictionary pop() atomic?
 ```python
 # Un-pythonic way
 #Pythonic Way
+d = {'matt': 'blue', 'rach':'green', 'ray': 'red'}
+while d:
+    key, value = d.popitem()
+    print(f'{key} --> {value}')
 ```
 #### Linking dictionaries
 ```python
@@ -172,75 +189,140 @@ for color in colors:
 #### Clarify function calls with keyword arguments
 ```python
 # Un-pythonic way
+twitter_search('@obama', False, 20, True)
 #Pythonic Way
+twitter_search('@obama', retweets=False, numtweets=20, popular=True)
 ```
 #### Clarify multiple return values with named tuples
 ```python
 # Un-pythonic way
+doctest.testmod()
+(0,4)
 #Pythonic Way
+doctest.testmod()
+TestResults(failed=0, attemped=4)
+
+TestResults = namedtuple('TestResults', ['failed', 'attempted'])
 ```
 #### Unpacking sequences
 ```python
 # Un-pythonic way
+p = ['Ray', 'Hettinger', 0x30, 'python']
+fname = p[0]
+lname = p[1]
+age = p[2]
+email = p[3]
 #Pythonic Way
+fname, lname, age, email = p
 ```
 #### Updating multiple state variables
 ```python
 # Un-pythonic way
+def fiboncci(n):
+    x = 0
+    y = 1
+    for i in range(n):
+        print(x)
+        t = y   
+        y = x + y   
+        x = t
 #Pythonic Way
+# updating state variables at the same time eliminates an entire class
+# of errors due to out-of-order updates
+def fibonacci(n):
+    x, y = 0, 1
+    for i in range(n):
+        print(x)
+        x, y = y, x + y
 ```
 #### Simultaneous state updates
 ```python
 # Un-pythonic way
+tmp_x = x + dx * t
+tmp_y = y + dy * t
+tmp_dx = influence(m, x, y, dx, dy, partial='x')
+tmp_dy = influence(m, x, y, dx, dy, partial='y')
+x = tmp_x
+y = tmp_y
+dx = tmp_dx
+dy = tmp_dy
+
 #Pythonic Way
+# This is similar to excel where formula is taken from the previos if rows:
+# here you can visualize in a way that what's on the right is referring to 
+# the previous row and in the left is the new one.
+x, y, dx, dy = (x + dx * t, 
+                y + dy * t, 
+                influence(m, x, y, dx, dy, partial='x'),
+                influence(m, x, y, dx, dy, partial='y'))
 ```
 #### Concatenating strings
 ```python
 # Un-pythonic way
+names = ['ray', 'rach', 'matt', 'roger', 'betty', 'melissa', 'judy', 'charlie']
+# it takes quadratic behavior 
+s = names[0]
+for name in names[1:]:
+    s += ', ' + name
+print(s)
 #Pythonic Way
+print(', '.join(names))
 ```
 #### Updating sequences
 ```python
 # Un-pythonic way
+names = ['ray', 'rach', 'matt', 'roger', 'betty', 'melissa', 'judy', 'charlie']
+
+del names[0]
+names.pop(0)
+names.insert(0, 'mark')
+
 #Pythonic Way
+# this is much faster for pop and push operation
+names = deque(['ray', 'rach', 'matt', 'roger', 'betty', 'melissa', 'judy', 'charlie'])
+del names[0]
+names.popleft()
+names.appendleft('mark')
 ```
 #### Using decorators to factor-out administrative logic
 ```python
 # Un-pythonic way
+def web_lookup(url, saved={}):
+    if url in saved:
+        return saved[url]
+    page = urllib.urlopen(url).read()
+    saved[url] = page
+    return page
 #Pythonic Way
+# you can put @cache decorator over any function which returns same value
+# for an argument
+@cache
+def web_lookup(url):
+    return urllib.urlopen(url).read()
 ```
 #### Caching decorator
 ```python
-# Un-pythonic way
 #Pythonic Way
+def cache(func):
+    saved = {}
+    @wraps(func)
+    def newfunc(*args):
+        if args in saved:
+            return newfunc(*args)
+        result = func(*args)
+        saved[args] = result
+        return result
+    return newfunc
 ```
 #### Factor-out temporary contexts for decimal
 ```python
 # Un-pythonic way
+old_context = getcontext().copy()
+getcontext().prec = 50
+print(Decimal(355)/ Decimal(113))
+setcontext(old_context)
+
 #Pythonic Way
-```
-#### How to open and close files
-```python
-# Un-pythonic way
-#Pythonic Way
-```
-#### How to use locks
-```python
-# Un-pythonic way
-#Pythonic Way
-```
-#### Factor-out temporary context
-```python
-# Un-pythonic way
-#Pythonic Way
-```
-#### Context manager: redirect_stdout()
-```python
-# Un-pythonic way
-#Pythonic Way
-```
-#### Concise expressive one-liners
-```python
-# Un-pythonic way
-#Pythonic Way
+with localcontext(Context(prec=50)):
+    print(Decimal(355)/Decimal(113))
 ```
