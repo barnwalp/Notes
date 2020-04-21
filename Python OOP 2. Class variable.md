@@ -4,7 +4,7 @@ class. unlike instance variable which are unique for each instances, class
 variables should be same for each instance.
 
 class variables can either be accessed through class itself or through 
-an instance of the class which is self.raise_amount in the current example.
+an instance of the class which is `self.raise_amount` in the current example.
 
 ```python
 class Employee:
@@ -68,7 +68,7 @@ emp2.apply_raise()  # raise amount will be 1.04
 ```
 This is also worth mentioning that self will allow any subclass to override
 that constant. 
-Example where using self to access class variable does not make sense
+Example, where using self to access class variable does not make sense
 ```python
 class Employee:
     num_of_emps = 0
