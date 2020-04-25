@@ -1,7 +1,7 @@
 ## Property Decorators - Getter, Setters and Deleters
-init method should never generate variables (which has not been explicitly 
+init method should never generate variables (which has not been explicitly
 passed while object creation) in its body. If done so, it may not reflect the
-variable  which may have been changed through class instance after 
+variable  which may have been changed through class instance after
 initialization. for example like `emp_1.first = 'Nisha'`.
 
 ```python
@@ -10,7 +10,7 @@ class Employee:
         self.first = first
         self.last = last
         self.email = first + '.' + last + 'email.com'
-    
+
     def fullname(self):
         return '{} {}'.__format__(self.first, self.last)
 
@@ -24,7 +24,7 @@ similar to `fullname` but it will break the code for someone using this class
 and they will have to change every instance of the email attributes with email
 method.
 
-This is where property method helps python and provide a kind of getter and 
+This is where property method helps python and provide a kind of getter and
 setter as it allows us to define a method but we can access it like an
 attribute
 
@@ -70,4 +70,3 @@ class Employee:
 
 del emp_1.fullname
 ```
-

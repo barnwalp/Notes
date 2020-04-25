@@ -249,10 +249,10 @@ dy = tmp_dy
 
 #Pythonic Way
 # This is similar to excel where formula is taken from the previos if rows:
-# here you can visualize in a way that what's on the right is referring to 
+# here you can visualize in a way that what's on the right is referring to
 # the previous row and in the left is the new one.
-x, y, dx, dy = (x + dx * t, 
-                y + dy * t, 
+x, y, dx, dy = (x + dx * t,
+                y + dy * t,
                 influence(m, x, y, dx, dy, partial='x'),
                 influence(m, x, y, dx, dy, partial='y'))
 ```
@@ -260,7 +260,7 @@ x, y, dx, dy = (x + dx * t,
 ```python
 # Un-pythonic way
 names = ['ray', 'rach', 'matt', 'roger', 'betty', 'melissa', 'judy', 'charlie']
-# it takes quadratic behavior 
+# it takes quadratic behavior
 s = names[0]
 for name in names[1:]:
     s += ', ' + name

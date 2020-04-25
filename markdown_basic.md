@@ -43,11 +43,10 @@ some paragraph with text
 ___
 
 
-This is being *created* on **Wednesday** ~~Saturday~~. 
+This is being *created* on **Wednesday** ~~Saturday~~.
 
 <!-- Task List -->
 
 * [x] Task 1
 * [x] Task 2
 * [ ] Task 3
-

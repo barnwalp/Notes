@@ -2,7 +2,7 @@
  Inheritance allows us to inherit attributes and methods from a parent class. we
  can create a subclasses and get all the functionality of parent class
  and then overwrite or add completely new functionality without affecting
- the parent class. 
+ the parent class.
  ```python
 class Employee:
     raise_amount = 1.04
@@ -10,7 +10,7 @@ class Employee:
         self.first = first
         self.last = last
         self.pay = pay
-    
+
     def apply_raise(self):
         self.pay = self.pay * self.raise_amount
 
@@ -43,7 +43,7 @@ class Developer(Employee):
 dev_1 = Developer('Niti', 'Chauhan', 75000, 'Javascript')
 ```     
 super.__init__() method is going to pass first, last and pay to our
-Employees init method and let that class handle those arguments 
+Employees init method and let that class handle those arguments
 
 ```python
 class Employee:
@@ -51,7 +51,7 @@ class Employee:
     -----
 
 class Manager(Employee):
-    # Note: Mutable data type such as list or dictionary should not be 
+    # Note: Mutable data type such as list or dictionary should not be
     # passed as default arguments and hence None is passed here
     def __init__(self, first, last, pay, employees=None):
         super().__init__(first, last, pay)
@@ -59,7 +59,7 @@ class Manager(Employee):
             self.employees = []
         else:
             self.employees = employees
-    
+
     def add_emp(self, emp):
         if emp not in self.employees:
             self.employees.append(emp)
@@ -70,5 +70,5 @@ class Manager(Employee):
     def print_emps(self):
         for emp in self.employees:
             print('-->', emp.first)
-  
+
 ```
