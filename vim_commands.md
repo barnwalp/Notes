@@ -18,6 +18,8 @@
 	ctrl + O --- to go back to where you came from
 	ctrl + I --- Repeat to go further
 	%  ---  place the cursor on any (, [, { to find the matching ), ], }
+	gT --- to go to the next tab
+	gt --- to go to the previous tab
 ### 3. undo and redo in VIM
 	u  --- undo the previous change
 	ctrl+r --- redo the previous undo

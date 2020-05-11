@@ -1,0 +1,103 @@
+" Vim with all enhancements
+source $VIMRUNTIME/vimrc_example.vim
+
+" vim-plug plugins go here
+call plug#begin('~/.vim/plugged')
+"gruvbox color scheme
+Plug 'morhetz/gruvbox'
+
+"VIM status line
+Plug 'powerline/powerline'
+
+call plug#end()
+
+" Use the internal diff if available.
+" Otherwise use the special 'diffexpr' for Windows.
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+"additional changes
+syntax on
+set noerrorbells  "no sound effect 
+set smartindent  "auto indenting
+set nu  "line numbers
+set nowrap "dont wrap code
+set noswapfile  "no vim.swap file
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch  "incremental search
+set tabstop=4  " tab will take 4 spaces
+colors elflord "change the default color scheme
+set ruler
+set backup
+set backupdir=~/vimtmp//,.  "moving backup files
+set directory=~/vimtmp//,.  "moving swap files
+set colorcolumn=80 "code width will be 80 character
+highlight ColorColumn ctermbg=233 guibg=lightgrey
+set clipboard=unnamed  "standard copy paste like other editor
+set mouse=a  "enable standard mouse cursor functions
+set bs=2  "enable standard backspace function
+" bind cntr+<movement> keys to move around the windows 
+" map <c-j> <c-w>j
+" map <c-k> <c-w>k
+" map <c-l> <c-w>l
+" map <c-h> <c-w>h
+inoremap jj <Esc>  " remap escape key to ii
+"first line will work in normal mode, it will save the file and run the file
+"will python when <F9> is pressed. second line does the same thing but leaves
+"insert mode first
+
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+" autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+colorscheme gruvbox  "to set the default colorscheme as gruvbox 
+
+"powerline set up
+set guifont=Inconsolata\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+" set term=xterm-256color
+set termencoding=utf-8
+
+if has("gui_running")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h15
+        colorscheme PaperColor              " set color scheme
+    endif
+endif
