@@ -48,3 +48,11 @@
 
 ### 7. Miscellaneous
 	typing a bash command from the vim type, ! followed by the command in the noremal mode
+
+### 8. Navigation in vim splits
+   :vsp  --- open a new vertical splits
+   :vsp file_name.py --- open a new file in vertical split with name file_name.py
+   :sp   --- open a horizontal split
+   ctrl+w hjkl --- to navigate among the vim splits
+   :10sp --- provide the width of the new split 
+
