@@ -9,6 +9,7 @@
 	G  --- to get to the last line of document
 	2G --- to get to the second line of document
 	w  --- to get to the start of the next word
+	b  --- to get to the start of the previos word
 	e  --- to get to the end of the current word
 	$  --- to get to the end of the line, including the last character
 	2w --- to move the curser two words forward
@@ -54,5 +55,19 @@
    :vsp file_name.py --- open a new file in vertical split with name file_name.py
    :sp   --- open a horizontal split
    ctrl+w hjkl --- to navigate among the vim splits
-   :10sp --- provide the width of the new split 
+   :10sp --- provide the width of the new split
+### 9. Mastering the VIM - Notes
+   . - carry out the last executed operation. for eg. dw
+   operations can be divided in two part verbs and noun. for eg
+   		verbs are d-delete, c-change, >-indent, y-yank, v-visually select
+		nouns are
+			iw - inner word; diw will delete word from anywhere inside word
+			it - inner tag; dit will delete contents inside of tag
+			i" - inner quotes; di" will delete contents inside of quotes
+			ip - inner paragraph; dip will delete contents inside of para
+			i( - inner bracket; di( will delete contents inside of bracket
+	patameterized text object
+		f, F - "find" next character, it can be used with verbs, eg, ctL will changed everthing upto L
+		t, T - similar to f, F, but cursor does not go upto the character
+		./ word_name - it can be used with verbs as well, eg. c./verbs will change from current position to first occurence of verbs
 
