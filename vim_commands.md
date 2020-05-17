@@ -71,3 +71,16 @@
 		t, T - similar to f, F, but cursor does not go upto the character
 		./ word_name - it can be used with verbs as well, eg. c./verbs will change from current position to first occurence of verbs
 
+
+
+
+###################################################################################
+################################VIM PLUGINS########################################
+###################################################################################
+
+1. install vimplug using following command:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	It creates a new directory 'autoload' in .vim directorty and store plug.vim
+
+
