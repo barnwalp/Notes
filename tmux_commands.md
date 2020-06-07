@@ -13,3 +13,4 @@
 	4. ctrl+d   - exit the current pane, you can also type exit
 	5. ctrl+b arrow key - switch panes
 	6. ctrl+b arrow key(pressed) - resize pane
+	7. ctrl+b Pgup/down - to navigate the bash pane, q to quit navigation mode

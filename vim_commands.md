@@ -71,7 +71,13 @@
 		t, T - similar to f, F, but cursor does not go upto the character
 		./ word_name - it can be used with verbs as well, eg. c./verbs will change from current position to first occurence of verbs
 
-
+### 10. Folding in VIM
+	First select the para you want to fold, then use
+	zf - to fold the para
+	zo - to open the para
+	zc - type anywhere in para to re-fold the para
+	:mkview - to save the current view, it will save the current view in .vim/view folder
+	:loadview - to reload the current saved view where folding has been saved
 
 
 ###################################################################################
