@@ -1,4 +1,6 @@
 ### Scrapy Notes
+
+#### Response.css syntax
 1. To get the title with the selector
 ```python
 response.css('title')
@@ -63,4 +65,21 @@ for post in response.css('div.post-item'):
 	title = post.css('.post-header a::text')[2].get()
 	print(dict(title=title, date=date, author=author))
 
+```
+
+#### Scrapy Shell Commands
+
+1. Crawl a website url in the scrapy shell
+```bash
+scrapy shell [url]
+```
+
+2. Start crawling a spider using its name
+```bash
+scrapy crawl <spider name>
+```
+
+3. Outputing spiders result into json file
+```bash
+scrapy crawl <spider name> -o filename.json
 ```
