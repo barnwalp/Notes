@@ -21,6 +21,7 @@
 	`A && B`	//Run B if and only if A succeeded
 	`A || B`	//Run B if and only if A failed
 	`A &`		//Run A in background
+	`A | B`		//each commands read s previous command's output
 
 ##### How to check current os version
 	`lsb_release -a`
@@ -63,3 +64,70 @@
 
 ##### How to unzip file
 	unzip file.zip -d destination_folder
+
+##### Wildcard matching
+	```
+	* 		--> All filenames
+	g*		--> files that begins with 'g'
+	b*.txt	--> files that begins with "b" and ends with ".txt"
+	Data???	--> files that begins with "Data" followed by exactly 3 more char
+	[abc]* 	--> files that begins with 'a' or 'b' or 'c' followed by any chars
+	[[:upper:]]*	--> files that begins with an uppercase letter
+	backup.[[:digit]][[:digit]]	--> file that begins with 'backup' followed by exactly 2 numerals
+	*![[:lower]]	--> file that does not end with lowercase letter
+	```
+	[characters] are:
+		[:alnum:]	--> alphanumeric characters
+		[:alpha:]	--> alphabetic characters
+		[:digit:]	--> numerals
+		[:upper:]	--> uppercase alphabetic
+		[:lower:]	--> lowercase alphabetic
+
+##### working with commands
+	type	--> display information about command type
+	which 	--> locate a command; only works for executables, not builtin nor aliases
+	help	--> display reference page for shell builtin
+
+	Note: while getting the help docs for shell, if a square brackets appear in the
+	description of a command syntax, it means optional items and vertical bar char
+	indicates mutually exclusive items. in case of cd [-L|-P] [dir] means that cd may
+	be followed optionally by either a "-L" or "-P" and optionally followed by "dir"
+	some commands support --help option
+
+	man		--> display an on-line command reference
+
+##### I/O Redirection
+	ls > file_list.txt	--> file_list is overwritten with output of ls
+	ls >> file_list.txt	--> output will be appended to the file
+	sort < file_list.txt--> sort prcess the content of file_list
+	sort < file_list.txt > sorted_file_list.txt 	--> it will redirect the
+	final output to the sorted_file_list
+
+##### filters
+	sort	--> sort standard input and output the result to standard o/p
+
+	uniq	--> given a sorted stream of data from standard input, it
+	removes duplicate lines of data
+
+	grep	--> examine each line of data it receive from standard input
+	and output every line that contains a specified pattern of character
+
+##### Expansion
+	echo *	--> instead of outputing * it will return names of the files/folder
+	in the current directory; shell always expands the qualifying commands before
+	the command is carried out, so the echo never saw "*". only its expanded result.
+
+	echo ~	--> will result in home path
+	echo $((2 + 2))	--> will output 4; arithmetic expansion uses the form $((expression))
+	arithmetic expression does not support digit
+
+	brace expansion
+		echo Front-{A,B,C}-Back --> will output: Front-A-Back Front-B-Back Front-C-Back
+		echo Number_{1..5}		--> output: Number_1 Number_2 Number_3 Number_4 Number_5
+		echo {Z..A}				--> output: Z Y X ...............C B A
+		echo a{A{1,2},B{3,4}}	--> output: aA1b aA2b aB3b aB4b
+
+	command substitution
+		echo $(ls)		--> result ls
+		ls -l $(which cp)--> getting the listing of cp program without knowing the path
+
