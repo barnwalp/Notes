@@ -103,3 +103,124 @@ with open("myfile.txt") as f:
     for line in f:
         print(line, end="")
 ```
+
+### Defining Functions
+
+- Default argument values in a function definition: by providing default
+value for one or more arguments, function can be called in several ways
+```python
+def ask_ok(prompt, retries=4, reminder='Please try again!'):
+    while True:
+        ok = input(prompt)
+        if ok in ('y', 'ye', 'yes'):
+            return True
+        if ok in ('n', 'no', 'nop', 'nope'):
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise ValueError('invalid user response')
+        print(reminder)
+# function can be called as:
+ask_ok('do you want to quit')
+ask_ok('ok to overwrite file', 2)
+ask_ok('ok to overwrite file', 2, 'only yes or no')
+```
+- Default values are evaluated only once and at the point of function definition
+in the defining scope
+```python
+i = 5
+
+def f(arg=i):
+    print(arg)
+
+i = 6
+f() 	# will return 5 instead of 6
+```
+- Since default value is evaluated only once, it makes a difference when the default
+is a mutable object such as list, dict or instances of most classes. following function
+accumulates the arguments passed to it on subsequent calls:
+```python
+def f(a, L=[]):
+    L.append(a)
+    return L
+
+print(f(1))		# returns [1]
+print(f(2))		# returns [1, 2]
+print(f(3))		# returns [1, 2, 3]
+```
+- Better way to write the function is like this instead:
+```python
+def f(a, L=None):
+    if L is None:
+        L = []
+    L.append(a)
+    return L
+
+print(f(1))		# returns [1]
+print(f(2))		# returns [2]
+```
+- There are two kind of arguments that are passed to a function:
+	1. keyword argument: argument preceeded by an identifier in a function call or passed
+	as a value in a dictionary preceded by **.
+	```python
+	complex(real=3, imag=5)
+	complex(**{'real': 3, 'imag': 5})
+	```
+	2. positional argument: these can appear at the beginning of an argument list and/or
+	be passed as elements of an iterable preceded by *.
+	```python
+	complex(3, 5)
+	complex(*(3, 5))
+	```
+- if a function has both keyword and postional arguments, then keyword arguments must
+follow positional arguments and theie order is not important
+```python
+def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
+    print("-- This parrot wouldn't", action, end=' ')
+    print("if you put", voltage, "volts through it.")
+    print("-- Lovely plumage, the", type)
+    print("-- It's", state, "!")
+
+parrot('a million', 'bereft of life', 'jump') 	# will pass voltage, state and action argument
+parrot (action='vooooom', voltage='jump')		# is correct, order is not important
+parrot(110, voltage=220)     					# incorrect; duplicate value for same argument
+```
+- when a parameter of form **name is present, it receives a dictionary containing all keyword
+arguments. this may be combined with a formal parameter of form *name which receives a tuple
+containing the positional arguments beyond the formal parameter list (*name must occur before
+**name)
+```python
+def cheeseshop(kind, *arguments, **keywords):
+    print("-- Do you have any", kind, "?")
+    print("-- I'm sorry, we're all out of", kind)
+    for arg in arguments:
+        print(arg)
+    print("-" * 40)
+    for kw in keywords:
+        print(kw, ":", keywords[kw])
+
+# function is to be called in this fashion
+cheeseshop("Limburger", "It's very runny, sir.",
+           "It's really very, VERY runny, sir.",
+           shopkeeper="Michael Palin",
+           client="John Cleese",
+           sketch="Cheese Shop Sketch")
+```
+- There is also a way to explicitly specify the type of arguments that a function take:
+```python
+# both keyword and positional arguments may be passed
+def standard_arg(arg):
+    print(arg)
+
+# only positional arguments can be passed
+def pos_only_arg(arg, /):
+    print(arg)
+
+# only keyword arguments can be passed
+def kwd_only_arg(*, arg):
+    print(arg)
+
+# first argument is positional, second can be both and third can only be keyword argument
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
+```
