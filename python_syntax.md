@@ -1,6 +1,6 @@
 ## Python Notes
 
-### catching error with try & except
+### Catching error with try & except
 - There are two kinds of errors: syntax errors and exceptions
 - Exceptions are the error detected during execution and are not unconditionally
 fatal. examples are: ZeroDivisionError, NameError, TypeError
@@ -224,3 +224,21 @@ def kwd_only_arg(*, arg):
 def combined_example(pos_only, /, standard, *, kwd_only):
     print(pos_only, standard, kwd_only)
 ```
+- lambda expressions: lambda functions are single expression that can reference variables
+from the containing scope. this function returns sum: `lambda a, b: a+b.
+```python
+func = lambda a: a + 1
+func(0)			# returns 1
+
+def make_incrementor(n):
+    return lambda x: x + n
+
+# it amounts to f = lambda x: x + 42
+f = make_incrementor(42)
+f(0)			# returns 42
+f(1)			# returns 43
+
+pairs = [(1, 'one'), (2, 'two'), (3, 'three')]
+pairs.sort(key=lambda pair: pair[1])		# will sort based on 2nd value
+```
+
