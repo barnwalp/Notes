@@ -225,7 +225,7 @@ def combined_example(pos_only, /, standard, *, kwd_only):
     print(pos_only, standard, kwd_only)
 ```
 - lambda expressions: lambda functions are single expression that can reference variables
-from the containing scope. this function returns sum: `lambda a, b: a+b.
+from the containing scope. this function returns sum: `lambda a, b: a+b``.
 ```python
 func = lambda a: a + 1
 func(0)			# returns 1
@@ -242,3 +242,50 @@ pairs = [(1, 'one'), (2, 'two'), (3, 'three')]
 pairs.sort(key=lambda pair: pair[1])		# will sort based on 2nd value
 ```
 
+### Python Iterators and generators
+
+- Most container objects such as list, tuple, dict etc can be looped over using a for
+statement. Behind the scene, the for statement calls iter() on the container object.
+the function returns an iterator object that defines the method __next__() which access
+elements in the container one at a time. when there are no more elements, __next__()
+raises a StopeIteration exception which tells the for loop to terminate.
+
+To add a iterator behavior to your classes, define an __iter__() method which returns
+an object with a __next__() method. if the class defines __next__(), then __iter__()
+can just return self.
+
+```python
+class Reverse:
+	def __init__(self, data):
+		self.data = data
+		self.index = len(data)
+
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		if self.index == 0:
+			raise StopIteration
+		self.index = self.index - 1
+		return self.data[self.index]
+
+rev = Reverse('spam')
+
+```
+- Generator are written like a regular functions but use the yield statement whenever they
+want to return data. Each time next() is called on it, the generator resumes where it left
+off (it remembers all the data values and which statement was last executed)
+
+```python
+def reverse(data):
+	for index in reversed(range(len(data))):
+		yield data[index]
+
+for char in reverse('golf'):
+	print(char)
+
+```
+anything that can be done with generator can also be done with class-based iterators. what
+makes generator so compact is that the __iter__() and __next__() methods are created
+automatically. Not only the local variables and exection state are automatically saved
+between calls, when generator terminates, they automatically raise StopIteration.
