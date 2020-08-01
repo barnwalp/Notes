@@ -83,3 +83,12 @@ scrapy crawl <spider name>
 ```bash
 scrapy crawl <spider name> -o filename.json
 ```
+
+### Starting scrapy project
+
+1. Create the new scrapy project
+```bash
+scrapy startproject project_name
+```
+
+2. Create .py file in the spider subfolder inside project folder

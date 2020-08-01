@@ -6,15 +6,26 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'				"Gruvbox colorscheme plugin
-
 "python-mode plugin
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'valloric/youcompleteme'		"youcompleteme
+Plug 'tpope/vim-fugitive'			"fugitive
 Plug 'scrooloose/nerdtree'			"Nerdtree plugin
 Plug 'ctrlpvim/ctrlp.vim'			"Ctrl P plugin
 Plug 'tpope/vim-surround'			"surround plugin
+Plug 'jamshedvesuna/vim-markdown-preview'	"vim markdown preview
 call plug#end()
 
 """""""""""""""""""""""Plugins based settings""""""""""""""""""""""
+"you complete me settings
+
+"To use youcompleteme, it need to be compiled with these 3 steps
+"1. sudo apt install build-essential cmake vim python3-dev
+"2. cd ~/.vim/plugged/youcompleteme
+"3. python3 install.py --all
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 
 "Changing built-in colorscheme with gruvbox
 colorscheme gruvbox
@@ -29,13 +40,8 @@ let g:pymode_run=1					"turn on the run code script
 let g:pymode_run_bind='<leader>r' 	"bind key to run python code
 let g:pymode_lint=1					"turn on code checking
 let g:pymode_lint_on_write=1		"check code on every save
-"let g:pymode_lint_on_fly=0			"check code when editing
 let g:pymode_lint_messages=1		"show error message if cursor placed on error line
 
-"Setup pymode quickfix window
-"let g:pymode_quickfix_minheight=3
-"let g:pymode_quickfix_maxheight=5
-"set pymode preview window height
 "preview window is used to show documentation and output from pymode-run
 let g:pymode_preview_height=&previewheight
 let g:pymode_indent=1				"enable PEP8 compatible python indent
@@ -47,13 +53,19 @@ let g:pymode_doc_bind='K'			"bind key to show docs for current word
 "ctrl p searches in the directory in which vim was opened
 let g:ctrlp_working_path_mode = 0
 
+"Jamshed Vesuna Vim markdown preview settings
+let vim_markdown_preview_browse='Google Chrome'
+let vim_markdown_preview_hotkey='<leader>p'
+" let vim_markdown_preview_toggle=0
+
 """""""""""""""""""""""""END OF VIM PLUGINS"""""""""""""""""""""""""
 
 
-"""""""""""""""""""""""""BASIC VIMRC SETTINGS"""""""""""""""""""""""
+""""""""""""""""""""BASIC VIMRC SETTINGS - START""""""""""""""""""""
 
 "remove yellow highlights in blank area
 autocmd VimEnter * set t_ut=
+
 " set warp as default for quickfix
 augroup quickfix
 	autocmd!
@@ -84,6 +96,9 @@ set splitbelow splitright
 
 " Fast Saving
 nmap <leader>w :w!<cr>
+
+"Fast Exit
+nmap <leader>q :q!<cr>
 
 " Always show current position
 set ruler
@@ -146,6 +161,37 @@ endfunction
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
+" Script to close all active windows except active window for quickfix
+function! CloseAllWindowsButCurrent()
+	let tabnr= tabpagenr()
+	let tabinfo=gettabinfo(tabnr)
+	let windows=tabinfo[0]['windows']
+
+	for winid in windows
+		let curwin=winnr() "could change
+		let winnr=win_id2win(winid)
+		if winnr!=curwin
+			execute ':'.winnr.'q!'
+		endif
+	endfor
+endfunction
+
+" Shortcut for closing all inactive windows in the current tab
+nmap <leader>c :call CloseAllWindowsButCurrent()<CR>
+
+" toggle set paste in vim to ensure that pasted content are not
+" improperly indented
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" copy paste in vim in wsl
+" copy (write) highlighted text to .vimbuffer
+vmap <C-c> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
+
+" paste from buffer
+map <C-v> :r ~/.vimbuffer<CR>
 
 
 " ################################################################
@@ -158,41 +204,9 @@ autocmd BufWinEnter *.* silent loadview
 "
 " set is a command that changes a built-in configuration variables such as
 " path, += means appending & ** means seach recursively in directories
-set path+=**			"find any files by :find file_name
+" set path+=**			"find any files by :find file_name
 
 " Display all matching files when we tab complete
-set wildmenu
+" set wildmenu
 " Now we can hit tab to :find by partial match and use * to make it fuzzy
 " we can also :b to autocomplete any open buffer
-"
-"
-" =====> ### Tag Jumping ###
-"
-"
-" ### Autocomplete ###
-" Autocomplete is already enabled in VIM and can be used by following commands
-" and items can be navigated using ^n and ^p to go to next and previous values
-"
-inoremap <leader>n <C-n>
-"
-" ### File Browsing ###
-" Tweaks for browsing
-let g:netrw_banner=0			"diable annoying banner
-let g:netrw_browse_split=4		"open in prior windows
-let g:netrw_altv=1				"open splits to the right
-let g:netrw_liststyle=3			"tree views
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-
-"Now We Can:
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mapping
-"
-" #### Snippets ####
-"
-"
-" ### Build Integration ###
-"
-"
-" ### Plugins to use ###

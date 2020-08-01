@@ -79,6 +79,15 @@
 	:mkview - to save the current view, it will save the current view in .vim/view folder
 	:loadview - to reload the current saved view where folding has been saved
 
+### 11. VIM Register - copy & paste
+	"ay	- yank and keep in register a
+	"by	- yank and keep in register b
+	"ap - paste from register a
+	"bp - paste from register b
+
+	"ap - paste from register a
+	"ap - paste from register a
+	"ap - paste from register a
 
 ###################################################################################
 ################################VIM PLUGINS########################################
