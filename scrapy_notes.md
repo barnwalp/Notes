@@ -92,3 +92,14 @@ scrapy startproject project_name
 ```
 
 2. Create .py file in the spider subfolder inside project folder
+
+### Running server with docker as per scrapy book
+1. git clone https://github.com/scalingexcellence/scrapybook.git
+2. cd into scrapybook directory
+3. run `docker-compose pull` - to check for updated images
+4. `docker-compose up` - will scroll log messages as various containers start up
+5. Ctrl + C - To stop the container
+
+to open the server from the google chrome, open
+http://localhost:9312/
+
