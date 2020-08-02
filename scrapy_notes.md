@@ -94,12 +94,38 @@ scrapy startproject project_name
 2. Create .py file in the spider subfolder inside project folder
 
 ### Running server with docker as per scrapy book
-1. git clone https://github.com/scalingexcellence/scrapybook.git
-2. cd into scrapybook directory
-3. run `docker-compose pull` - to check for updated images
-4. `docker-compose up` - will scroll log messages as various containers start up
-5. Ctrl + C - To stop the container
+	1. git clone https://github.com/scalingexcellence/scrapybook.git
+	2. cd into scrapybook directory
+	3. run `docker-compose pull` - to check for updated images
+	4. `docker-compose up` - will scroll log messages as various containers start up
+	5. Ctrl + C - To stop the container
 
-to open the server from the google chrome, open
-http://localhost:9312/
+	to open the server from the google chrome, open
+	http://localhost:9312/
 
+### Legality of scrapping websites.
+	1. Use an API if one is provided, instead of scraping data
+	2. Respect the terms of service (TOS)
+	3. Respect the rules of robots.txt
+	4. Use reasonable crawl rate i.e 1 request per 15 seconds
+	5. Identify your web scrapper with a legitimate user agent string. create a page
+	that explaints what you are doing and why and link back to the page in your
+	user agent string (e.g. 'MY-BOT(+https://yoursite.com/mybot.html')')
+	6. Dont republish scrapped data or any derivate dataset wihtout verifying
+	the license of the data or without obtaining a written permission from
+	the copyright holder
+
+### robots.txt
+	1. Before a search engine visit a site, it checks robots.txt for instructions
+	```
+	User-agent: *
+	Disallow: /
+	```
+	asterisk after user-agent means that robots.txt file applies to all wev robots
+	that visit the site.
+	the slash after Disallow to not visit any pages on the site.
+	2. Syntax for using the keywords is as follow:
+	User-agent: [name of the robot the following rules applies to]
+	Disallow: [the URL path you want to block]
+	Allow: [the URL path in of a subdirectory, within a blocked parent directory, that
+	you want to unblock]
