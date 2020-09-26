@@ -2,7 +2,7 @@
 
 Creating an empty class with no attribute and methods:
 ```python
-Class Employee:
+class Employee:
     pass
 ```
 Difference between Class and an instance of a class - A class is
@@ -10,8 +10,8 @@ basically a blueprint for creating instances. Each unique employee
 that we create using our Employee class will be an instance of that
 class.
 
-For example following 2 object will have their own unique instances of the
-class and will have unique memory locations.
+For example following 2 object will have their **own unique instances of the
+class and will have unique memory locations**.
 ```python
 emp_1 = Employee()
 emp_2 = Employee()
