@@ -54,3 +54,7 @@ testing of texify
 
 $\frac{1}{2m}$
 
+testing with html rendering using codecogs.com/latex/eqneditor.php
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=$$&space;J(\theta_0,&space;\theta_1)&space;=&space;{\frac{1}{2m}&space;\sum_{i=1}^{m}({h(x_i)&space;-&space;y_i})^2}&space;$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?amp;space;J(\theta_0,&space;\theta_1)&space;=&space;{\frac{1}{2m}&space;\sum_{i=1}^{m}({h(x_i)&space;-&space;y_i})^2}&space;quot; title="$ J(\theta_0, \theta_1) = {\frac{1}{2m} \sum_{i=1}^{m}({h(x_i) - y_i})^2} quot; /></a>
+
