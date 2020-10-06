@@ -50,3 +50,7 @@ If we take 800 and -0.15 as $ \theta_0 and \theta_1$, then the corresponding hyp
 
 ![000015](images/2020-10-06-000015.jpg)
 
+testing of texify 
+
+$\frac{1}{2m}$
+
