@@ -38,3 +38,4 @@ Since $ J(\theta_0, \theta_1)$ is a bowl like function, it does not have local m
 ![000024](images/2020-10-08-000024.jpg)
 
 ![000025](images/2020-10-08-000025.jpg)
+
