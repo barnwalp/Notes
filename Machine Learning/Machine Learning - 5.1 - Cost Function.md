@@ -63,3 +63,4 @@ Recall  that our derivative is the slope of a line tangent to the cost function,
 **Note: weight of the path from $a_i^2$ to $a_j^3$ will be $\Theta_{ji}^{2}$ . For example weight of path from $a_2^2$ to $a_1^3$ will be $\Theta_{12}^{2}$.**
 
 In the image above, to calculate $\delta_2^{(2)}$, we multiply the weights $\Theta_{12}^{(2)}$ and $\Theta_{22}^{(2)}$  by their respective $\delta$ values found to the right of each edge. So we get .$ \delta_2 ^ {2} = \Theta_{12} ^ {2}*\delta_1 ^ {3} + \Theta_{22} ^ {2}*\delta_2 ^ {3}$  
+

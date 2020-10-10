@@ -73,3 +73,4 @@ $ a^{(j)} = g(z^{(j)}) $
 ![000088](images/2020-10-10-000088.jpg)
 
 Neural network is a type of logistics regression in which instead of feeding input values, we are sending new feature "a" derived from input values. In the last step, we are doing exactly the same thing as we did in logistics regression. Adding all these intermediate layers in neural networks allows us to more elegantly produce interesting and more complex non-linear hypothesis.
+
