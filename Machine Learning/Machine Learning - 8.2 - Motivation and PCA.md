@@ -50,3 +50,29 @@ svd method in octave will return U matrix which will also have m columns, you ma
 ### PCA Algorithm Summary
 
 ![000188](images/2020-10-20-000188.jpg)
+
+## Applying PCA
+
+### Reconstruction from Compressed Representation
+
+![000189](images/2020-10-26-000189.jpg)
+
+### Choosing the number of principal components
+
+Generally K is chosen in such a way that 85% - 99% variance is retained
+
+![000190](images/2020-10-26-000190.jpg)
+
+![000191](images/2020-10-26-000191.jpg)
+![000192](images/2020-10-26-000192.jpg)
+
+### Advice for applying PCA
+
+![000193](images/2020-10-26-000193.jpg)
+
+![000194](images/2020-10-26-000194.jpg)
+
+Using PCA for overfitting is not recommended as it reduces the dimension of data without knowing the values of output data i.e. y. it throws away some valuable information.
+
+![000195](images/2020-10-26-000195.jpg)
+
