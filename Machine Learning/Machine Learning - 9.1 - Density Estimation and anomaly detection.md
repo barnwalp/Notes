@@ -39,3 +39,26 @@ $ \mu_2 = \frac{1}{m}[x_2^1+x_2^2+x_2^3+...+x_2^m] $
 
 ### Developing and evaluating Anomaly detection system
 
+![000208](images/2020-11-10-000208.jpg)
+
+![000209](images/2020-11-10-000209.jpg)
+
+![000210](images/2020-11-10-000210.jpg)
+
+### Anomaly detection vs supervised learning
+
+![000211](images/2020-11-11-000211.jpg)
+![000212](images/2020-11-11-000212.jpg)
+
+### Choosing what features to use
+
+Choose features that result in a bell curve in histogram, you can also convert features to create a more bell shape curve as described in the image below.
+
+![000213](images/2020-11-11-000213.jpg)
+
+![000214](images/2020-11-11-000214.jpg)
+
+![000215](images/2020-11-11-000215.jpg)
+
+![000216](images/2020-11-11-000216.jpg)
+
