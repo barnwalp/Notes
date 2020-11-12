@@ -62,3 +62,39 @@ Choose features that result in a bell curve in histogram, you can also convert f
 
 ![000216](images/2020-11-11-000216.jpg)
 
+### Multivariate Gaussian Distribution
+
+![000217](images/2020-11-11-000217.jpg)
+
+As you can see from above picture, even if P(x1) and P(x2) is higher than epsilon, you can easily deduce that taking both into account, it seems like an anomaly. i.e. it is highly unlikely that memory use will be that high with such low CPU load no matter what individual probability distribution tell.
+
+We can infer that probability regions (concentric circle) does not paint real picture of the anomaly detection.
+
+![000218](images/2020-11-11-000218.jpg)
+
+If you shrink sigma i.e. $ \sum$ then height increases and width of the bump diminishes.  
+
+![000219](images/2020-11-12-000219.jpg)
+
+you can also sigma for features separately, for example in the following example, variance of the feature $x_1$ can be  changed to 0.6  while keeping variance of feature $x_2$ same. this shows that $x_2$ takes wider range of values compared to $x_1$ 
+
+![000220](images/2020-11-12-000220.jpg)
+
+![000221](images/2020-11-12-000221.jpg)
+
+![000222](images/2020-11-12-000222.jpg)
+
+![000223](images/2020-11-12-000223.jpg)
+
+### Anomaly Detection using multivariate Gaussian Distribution
+
+![000224](images/2020-11-12-000224.jpg)
+
+![000225](images/2020-11-12-000225.jpg)
+
+ ![000226](images/2020-11-12-000226.jpg)
+
+ Here m is no of example and n is no of features.
+
+![0002227](images/2020-11-12-000227.jpg)
+
