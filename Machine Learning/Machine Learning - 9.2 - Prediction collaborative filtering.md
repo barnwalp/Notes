@@ -10,7 +10,7 @@
 
 ![000230](images/2020-11-12-000230.jpg)
 
-To simplify the cost function we will omit $m_j$
+To simplify the cost function we will om it $m_j$
 
 ![000231](images/2020-11-12-000231.jpg)
 
@@ -28,9 +28,24 @@ In the earlier chapters, we assume features parameter. To actually get the featu
 
 ### Collaborative Filtering Algorithm
 
-There is no reason to hard code $x_0$ as 1 as the algorithm is also learning the features, if the problem requires $x_0$ to be 1, algorithm will accommodate that. That means that both $x$ and $\theta$ is $R^n$ matrix
+There is no reason to hard code $x_0$ as 1 as the algorithm is also learning the features, if the problem requires $x_0$ to be 1, algorithm will accommodate that. That means that both $x$ and $\theta$ will be an $R^n$ matrix
 
 ![000236](images/2020-11-12-000236.jpg)
 
 ![000237](images/2020-11-12-000237.jpg)
+
+### Vectorization: Low Rank Matrix Factorization
+
+![000238](images/2020-11-14-000238.jpg)
+
+![000239](images/2020-11-14-000239.jpg)
+
+![000240](images/2020-11-14-000240.jpg)
+
+### Implementation Detail: Mean Normalization
+
+For a user who has not rated any of the movies, first term of the cost function will be 0, and minimization function will return theta matrix as 0 as well. Now given the 0 theta vector, all rating prediction will also be 0, which is counter-intuitive. hence different method is required for the user which has not rated any movies yet.
+
+![000241](images/2020-11-14-000241.jpg)
+![000242](images/2020-11-14-000242.jpg)
 
