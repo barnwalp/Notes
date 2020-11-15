@@ -43,3 +43,19 @@ mini batch gradient descent outperforms stochastic gradient descent when you vec
 ![000250](images/2020-11-15-000250.jpg)
 
 ![000251](images/2020-11-15-000251.jpg)
+
+### Online Learning
+
+ ![000252](images/2020-11-15-000252.jpg)
+
+CTR - click through rate - probability that an user will click a returned list from a search queries.
+
+![000253](images/2020-11-15-000253.jpg)
+
+### Map Reduce and Data Parallelism
+
+![000254](images/2020-11-15-000254.jpg)
+
+![000255](images/2020-11-15-000255.jpg)
+
+Instead of different machine, one can also use multiple core of same machine which is better as it does not have any network latency.
