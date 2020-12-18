@@ -28,7 +28,38 @@ Lets say the output of the model is fed to a downstream system which converts th
 
 ### Get the Data
 
-### Discover and visualize the data to gain insight
+#### Take a quick look at the data
+
+The 25%, 50% and 75% rows in ```df.describe()``` show the corresponding percentiles: a percentile indicates the value below which a given percentage of observations in a group of observations fall. for example, 25% of the districts have a housing_median_age lower than 18, while 50% are lower than 29 and 75% are lower than 37.
+
+Another quick way to get a feel of the type of the data you are dealing with is to plot a histogram for each numerical attribute. Things to consider in the histogram:
+
+1. In case a variable is capped at some ceiling and if precise predictions are required for values upper than the capped value, then you should either collect proper labels for the values for which labels were capped or remove those values from the training and test set.
+2. In case histogram is tail-heavy (i.e. they extend much farther to the right of the median than to the left), then we should try to transform these attributes to have more bell shaped distribution.
+
+#### Create a Test Set
+
+Pick some instances randomly, typically 20% of the dataset (or less if your dataset is very large)
+
+```python
+import numpy as np
+
+# This will generate different set every time it is run
+def split_train_test(data, test_ratio):
+    shuffled_indices = np.random.permutation(len(data))
+    test_set_size = int(len(data) * test_ratio)
+    test_indices = shuffled_indices[:test_set_size]
+    train_indices = shuffled_indices[test_set_size:]
+    return data.iloc[train_indices], data.iloc[test_indices]
+
+train_set, test_set = split_train_set(housing, 0.2)
+```
+
+
+
+
+
+### Discover and visualise the data to gain insight
 
 ### Prepare the data for Machine Learning algorithms
 
