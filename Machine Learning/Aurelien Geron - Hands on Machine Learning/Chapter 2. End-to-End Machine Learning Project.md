@@ -39,20 +39,47 @@ Another quick way to get a feel of the type of the data you are dealing with is 
 
 #### Create a Test Set
 
-Pick some instances randomly, typically 20% of the dataset (or less if your dataset is very large)
+How to create a test set:
+
+1. Pick some instances randomly, typically 20% of the dataset (or less if your dataset is very large)
+2. Ensure that when program (for creating test set) is re-run, same test-set is generated all the time
+3. When the updated dataset is fetched, then also test set should be the same.
+
+A common solution is to compute hash of each instance's identifier and put that instance in the test set if the hash is lower than or equal to 20% of the maximum value. you can use the most stable features to build a unique identifier.
+
+There is a scikit function, which satisfies first 2 abovementioned points, which work as
 
 ```python
-import numpy as np
+from sklearn.model_selection import train_test_split
 
-# This will generate different set every time it is run
-def split_train_test(data, test_ratio):
-    shuffled_indices = np.random.permutation(len(data))
-    test_set_size = int(len(data) * test_ratio)
-    test_indices = shuffled_indices[:test_set_size]
-    train_indices = shuffled_indices[test_set_size:]
-    return data.iloc[train_indices], data.iloc[test_indices]
+train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
 
-train_set, test_set = split_train_set(housing, 0.2)
+#############################################################
+
+X, y = np.arange(10).reshape((5, 2)), range(5)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+To satisfy all criteria as mentioned above, we can use:
+
+```python
+from zlib import crc32
+
+def test_set_check(identifier, test_ratio):
+    # this returns either true or false for identifier
+    return crc32(np.int64(identifier)) & 0xffffffff < test_ratio * 2**32
+
+def split_train_test_by_id(data, test_ratio, id_columns):
+    ids = data[id_column]
+    # single post underscore is used for naming your variable as python keywords and to avoid clash
+    # in_test_set will be a dataframe which will have values as either true or false for each value of index
+    in_test_set = ids.apply(lambda id_: test_set_check(id_, test_ratio))
+    return data.loc[~in_test_set], data.loc[in_test_set]
+
+housing_with_id["id"] = housing["longitude"] * 1000 + housing["latitude"]
+
+train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "id")
 ```
 
 
