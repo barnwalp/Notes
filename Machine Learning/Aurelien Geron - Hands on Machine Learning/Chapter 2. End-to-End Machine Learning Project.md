@@ -82,11 +82,36 @@ housing_with_id["id"] = housing["longitude"] * 1000 + housing["latitude"]
 train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "id")
 ```
 
+When you select test/train dataset randomly, there is a risk of introducing significant sampling bias. for example, US population is 51.3% females and 48.7% mails, so a well conducted survey in the US would try to maintain this ratio. This is called stratified sampling in which population is divided into homogeneous subgroups called strata and right number of instances are sampled from each stratum.
+
+in housing dataset, most median incomes are clustered around 1.5 to 6, but some median incomes go far beyond 6. so it is important that
+
+1. You have a sufficient number of instances in your dataset for each stratum
+2. Each stratum should be large enough and you should not have too many strata.
+
+```python
+# Creating a new column with median income categories 
+housing['income_cat'] = pd.cut(housing['median_income'], 
+                              bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
+                              labels=[1, 2, 3, 4, 5])
+
+
+from sklearn.model_selection import StratifiedShuffleSplit
+
+# it provides the train/test indices to split data in train/test sets
+split = StratifiedShuffledSplit(n_splits=1, test_size=0.2, random_state=42)
+for train_index, test_index in split.split(housing, housing['income_cat']):
+    strat_train_set = housing.loc[train_index]
+    strat_test_set = housing.loc[test_index]
+    
+# Now you should remove the income_cat attribute
+for set_ in (strat_train_set, strat_test_set):
+    set_.drop('income_cat', axis=1, inplace=True)
+```
 
 
 
-
-### Discover and visualise the data to gain insight
+### Discover and visualize the data to gain insight
 
 ### Prepare the data for Machine Learning algorithms
 
