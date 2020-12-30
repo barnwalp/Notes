@@ -113,6 +113,79 @@ for set_ in (strat_train_set, strat_test_set):
 
 ### Discover and visualize the data to gain insight
 
+#### Visualizing Geographical data
+
+Scatter plot using `df.plot`
+
+```python
+# setting the alpha to 0.1 makes it much easier to visualize the places where there is a high density of data points
+housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
+```
+
+```python
+housing.plot(kind='scatter',
+            x='longitude',
+            y='latitude',
+            alpha=0.4,
+            # radius of each circle represents district's population (option s) 
+            s=housing['population']/100,
+            label='population',
+            figsize=(10,7),
+            # color of the circle represents the price
+            c='median_house_value',
+            # a predefined color map called jet is being used which ranges from blue (low value) to red (high value)
+            cmap=plt.get_cmap('jet'),
+            colorbar=True,
+            )
+plt.legend()
+```
+
+#### Looking for Correlations
+
+```python
+# Getting standard correlation coefficient (Pearsons's r) between every pair of attributes
+corr_matrix = housing.corr()
+
+# Correlation of each attributes with the median house value
+corr_matrix['median_house_value'].sort_values(ascending=False)
+```
+
+Correlation coefficient only measures linear correlations. it may completely miss out on non-linear relationships.
+
+Plotting scatter plot of every numerical attributes against every other numerical attribute.
+
+```python
+from pandas.plotting import scatter_matrix
+
+attributes = ['median_house_value', 'median_income', 'total_rooms', 'housing_median_age']
+scatter_matrix(housing[attributes], figsize=(12, 8))
+
+# from the scatter matrix, you can see that most promising attribute to predict the median house value is the median income.
+housing.plot(kind='scatter', x='median_income', y='median_house_value', alpha=0.1)
+```
+
+in the correlation plot, there is a clearly visible line at $500,000 and other less obvious straight horizontal lines at 350,000 and 280,000, These kind of data quirks may be tackled by removing corresponding districts.
+
+#### Experimenting with Attribute Combinations
+
+Trying various attributes combinations:
+
+1. total number of rooms in a district is not very useful if you know how many households there are. number of rooms per household makes more sense.
+2. Similarly we can create two more sensible attributes such as number of bedroom per room and population per household
+
+```python
+housing['rooms_per_household'] = housing['total_rooms']/housing['households']
+housing['bedrooms_per_room'] = housing['total_bedrooms']/housing['total_rooms']
+housing['population_per_household'] = housing['population']/housing['households']
+```
+
+```python
+corr_matrix = housing_corr()
+corr_matrix['median_house_value'].sort_values(ascending=False)
+```
+
+Now you can see that bedroom_per_room and rooms_per_household are much more correlated to median_house_value than the original attributes.
+
 ### Prepare the data for Machine Learning algorithms
 
 ### Select a model and train it
