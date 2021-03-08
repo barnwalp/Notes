@@ -4,17 +4,17 @@
 2. class --> htmltag.classname, .classname, .c1.c2.c3, htmltag.c1.c2...cn
 3. parent>childtag
 
-`ul#categories>li` will return the li which are direct child of ul and will
-not return the lis present inside the li of ul
+    `ul#categories>li` will return the li which are direct child of ul and will
+    not return the lis present inside the li of ul
 
-you may use both of these as id is always unique, so `#username` is also enough
-ul# categories == #username
+    you may use both of these as id is always unique, so `#username` is also enough
+    ul# categories == #username
 
-This will select the input tag of class = `"form-control private-form_control login-email"`
-`input.form-control.private-form_control.login-email`
-`input#username.form-control.private-form_control.login-email`
-`.form-control.private-form_control.login-email`
-`input.login-email`
+    This will select the input tag of class = `"form-control private-form_control login-email"`
+    `input.form-control.private-form_control.login-email`
+    `input#username.form-control.private-form_control.login-email`
+    `.form-control.private-form_control.login-email`
+    `input.login-email`
 
 4. htmltag[id='value']
 `input[id='username']`	--- css with one attribute
@@ -23,8 +23,8 @@ This will select the input tag of class = `"form-control private-form_control lo
 5. contains the text in css
 
 it will select tags whose id contains either user or name
-`input[id*='user']
-input[id*='name']`
+`input[id*='user']`
+`input[id*='name']`
 
 6. starting the text in css
 `input[id^='user']`
