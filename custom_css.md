@@ -45,3 +45,21 @@
 
 - not operator in css:
     `input.form-control.private-form_control:not(.login-password)`
+
+## Examples - Scrapping quote hub
+url - https://www.brainyquote.com/topics/scrap-quotes
+
+- Getting all the quotes
+`response.css(".m-brick.grid-item.boxy.clearfix.bqQt.r-width .b-qt::text").getall()`
+
+- Getting all the author
+`response.css(".m-brick.grid-item.boxy.clearfix.bqQt.r-width .bq-aut::text").getall()`
+
+- Getting all the tags
+` response.css(".m-brick.grid-item.boxy.clearfix.bqQt.r-width .qkw-btn::text").getall()`
+
+- Getting the next page from the pagination
+`response.css(".active~ li + li a::attr(href)").get()`
+
+- Getting the link for authors
+`response.css("a[href='/authors']::attr(href)").get()`
