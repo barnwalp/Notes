@@ -63,3 +63,8 @@ url - https://www.brainyquote.com/topics/scrap-quotes
 
 - Getting the link for authors
 `response.css("a[href='/authors']::attr(href)").get()`
+
+url - https://www.brainyquote.com/authors/a-c-benson-quotes
+
+- Getting the birthdate of the author
+`response.css(".subnav-below-p a:nth-child(4)::text").get()`
