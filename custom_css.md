@@ -1,14 +1,10 @@
 ## Custom CSS Selector
 
-- CSS operators
-    - \> Child
-        It will return the li which are direct child of ul and will
-        not return the lis present inside the li of ul
-        `ul#categories>li`
-    - \+ Adjacent
-        ` div + p`
-    - \~ Sibling
-        ` div ~ p`
+- CSS combinator (example shown using div and p)
+    - **div p** : select all \<p> elements inside of \<div> element
+    - **div > p** : select all \<p> elements that are direct children of \<div> element
+    - **div + p** : select the first \<p> elements that are placed immediately after \<div> element
+    - **div ~ p** : select all \<p> elements that is preceded by a \<div> element. In this case, there can be some other element in between \<div> and \<p>.
 
 - selecting an element through an attribute
     `response.css('[itemprop="author"]::text').get()`
@@ -16,21 +12,20 @@
     `input[id='username']`	--- css with one attribute
     `input[id='username'][type='email']`	--- css with two attribute
 
-- it will select tags whose id contains either user or name
-    `input[id*='user']`
-    `input[id*='name']`
+- it will select tags whose id contains user
+    `input[id*='between']`
 
 - starting the text in css
-    `input[id^='user']`
+    `input[id^='start']`
 
 - ending the text in css
-    `input[id$='name']`
+    `input[id$='end']`
 
 - comma in css does union of the tags through css selector
     `div.private-form_input-wrapper, input#username`
 
 - first-of-type in css:
-    `ul#categories>li:first-of-type`
+    `ul#categories > li:first-of-type`
 
 - last-of-type in css:
     `ul#categories > li:last-of-type`
@@ -38,6 +33,8 @@
 - nth-of-type in css:
     `ul#categories>li:nth-of-type(3)` --- will get the 3rd li
     `ul#categories>li:nth-of-type(n)` --- will return all elements
+    `ul#categories>li:nth-of-type(odd)` --- will return all odd elements
+    `ul#categories>li:nth-of-type(even)` --- will return all even elements
 
 - sibling of element in css:
     `div.private-form_input-wrapper+div` --- elements on either side of + are siblings
