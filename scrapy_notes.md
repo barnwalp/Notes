@@ -2,31 +2,38 @@
 
 #### Scrapy Shell Commands
 
-1. Crawl a website url in the scrapy shell
 ```bash
-scrapy shell [url]
-```
-
-2. Start crawling a spider using its name
-```bash
-scrapy crawl <spider name mention inside program>
-```
-
-3. Outputing spiders result into json file
-```bash
-scrapy crawl <spider name> -o filename.json
-```
-
-4. scrapy shell can be started without url, which can be fetched later on
-```bash
-fetch(url)
-```
-
-### Starting scrapy project
-
-1. Create the new scrapy project
-```bash
+# Run quick benchmark
+scrapy bench
+# fetch html markup using scrapy downloader
+scrapy fetch url
+# Create the new scrapy project
 scrapy startproject project_name
+"""
+Files created after running start_project commans:
+1. scrapy.cfg - this file is useful to execute the spider you create; This is
+also used to deploy your project at heroku or scrappinghub cloud
+2. items.py - This is used to clean the data we scrap and then store the data
+in fields
+3. middleware.py - There are two type of middleware; one is spider middleware
+which is responsible for returning back the data and another is the downloader
+middleware which is responsible for downloading the HTML markup of website
+4. pipeline.py - This is used to store the item you scrap in the database
+5. settings.py - To tweak the setting and configuration of the project
+"""
+# Create new spider with pre-defined template
+scrapy genspider <spider_name>
+# run a spider
+scrapy crawl <spider_name>
+# Outputing spiders result into json file
+scrapy crawl <spider name> -o filename.json
+# scrapy shell can be started without url, which can be fetched later on using
+fetch(url)
+# check how spiders see the website, in a browser, pl note that scrapy sees a
+# website without javascript; spiders cant acutally render javascript
+view(response)
+# Note: it is advisable to disbale javascript in browser before finding the
+# css selector in chrom inspect toolbox
 ```
 
 2. Create .py file in the spider subfolder inside project folder
