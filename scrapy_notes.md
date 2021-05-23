@@ -25,8 +25,10 @@ middleware which is responsible for downloading the HTML markup of website
 scrapy genspider <spider_name>
 # run a spider
 scrapy crawl <spider_name>
-# Outputing spiders result into json file
+# Outputing spiders result into different file format
 scrapy crawl <spider name> -o filename.json
+scrapy crawl <spider name> -o filename.csv
+scrapy crawl <spider name> -o filename.xml
 # scrapy shell can be started without url, which can be fetched later on using
 fetch(url)
 # check how spiders see the website, in a browser, pl note that scrapy sees a
@@ -89,3 +91,15 @@ fetch("http://localhost:8050/render.html?url=url")
 ```
 
 3. Now you can scrap the data as usual
+
+### Debugging Scrapy Spider
+parse command allows to chekc the behavior of different parts of the spider at
+the method level
+
+```bash
+scrapy parse --spider=<spider_name> -c <parse_method> url
+# example
+scrapy parse --spider=countries -c parse_countries https://www.worldometers.info/world-population/china-population/
+# one can also pass the argument like meta through the command line
+scrapy parse --spider=countries -c parse_countries --meta={\"country_name\":\"China\"} https://www.worldometers.info/world-population/china-population/
+```
