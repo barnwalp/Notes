@@ -72,6 +72,9 @@ scrapy genspider <spider_name>
 	Allow: [the URL path in of a subdirectory, within a blocked parent directory, that
 	you want to unblock]
 
+### When to not use web scrapping
+
+
 ### Dynamic webpage scrapping using splash
 
 1. In case if any tags are visible in the inspect page but are not getting
@@ -102,4 +105,23 @@ scrapy parse --spider=<spider_name> -c <parse_method> url
 scrapy parse --spider=countries -c parse_countries https://www.worldometers.info/world-population/china-population/
 # one can also pass the argument like meta through the command line
 scrapy parse --spider=countries -c parse_countries --meta={\"country_name\":\"China\"} https://www.worldometers.info/world-population/china-population/
+```
+
+### Where is web scrapping used:
+1. Lead generation
+2. Real estate listing
+3. Price Monitoring
+4. Stock market tracking
+5. Drop shipping
+
+### Scrapy genspider template
+There are 4 available template in scrapy. By default, it uses basic template
+1. basic
+2. crawl
+3. csvfeed
+4. xmlfeed
+
+To use any other template use
+```bash
+scrapy genspider -t crawl <spider_name>
 ```
