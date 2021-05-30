@@ -125,3 +125,47 @@ To use any other template use
 ```bash
 scrapy genspider -t crawl <spider_name>
 ```
+
+### Scrapping javascript enabled webpages
+scrapy does not have built-in engine that can interpret javascript
+In such scenario, we can either use splash or selenium; splash is a
+lightweight browser which uses apple-webkit engine same as safari similar
+to as Google Chrome uses V-8 engine
+
+### Docker and splash
+```bash
+# Installing splash
+sudo docker pull scrapinghub/splash
+
+# Launching splash
+sudo docker run -it -p 8050:8050 scrapinghub/splash
+
+# Check in browser if splash is running 
+http://localhost:8050
+```
+
+### Splash and lua programming language
+As there are no icon on splash; you interact with browser through code
+```lua
+function main(splash, args)
+  -- get the url from the input box
+  url = args.url
+  -- open the url in the browser
+  --assert will handle the error if found any while opening the link
+  assert(splash:go(url))	
+  -- it is advisable to wait for 1 second for page to open
+  assert(splash:wait(1))
+
+  -- return the response as a snapshot
+  --return splash:png()
+  -- return the response as a snapshot
+  --return splash:html()
+  
+  -- creating object in lua
+  return {
+    image = splash:png(),
+    html= splash:html()
+  }
+end
+```
+
