@@ -148,6 +148,15 @@ http://localhost:8050
 As there are no icon on splash; you interact with browser through code
 ```lua
 function main(splash, args)
+  -- setting user-agent  
+  --splash:set_user_agent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36")	
+  --[[
+  headers = {
+	  ['User-Agent'] = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36"
+  }
+  splash:set_custom_headers(headers)
+  ]]--
+  
   -- get the url from the input box
   url = args.url
 
