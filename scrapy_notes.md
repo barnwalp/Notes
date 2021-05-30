@@ -150,17 +150,39 @@ As there are no icon on splash; you interact with browser through code
 function main(splash, args)
   -- get the url from the input box
   url = args.url
+
   -- open the url in the browser
   --assert will handle the error if found any while opening the link
-  assert(splash:go(url))	
+  assert(splash:go(url))
+
   -- it is advisable to wait for 1 second for page to open
   assert(splash:wait(1))
+
+  -- select the input box
+  input_box = assert(splash:select("#search_form_input_homepage"))
+
+  -- you can only write value in focus state
+  input_box:focus()
+
+  --send text
+  input_box:send_text("my user agent")
+  assert(splash:wait(1))
+
+  -- select search button
+  btn = assert(splash:select("#search_button_homepage"))
+  btn:mouse_click()
+
+  -- can also be done in one line
+  input_box:send_keys("<Enter>")
+  assert(splash:wait(2))
 
   -- return the response as a snapshot
   --return splash:png()
   -- return the response as a snapshot
   --return splash:html()
-  
+ 
+  -- get the full page in png
+  splash:set_viewport_full()
   -- creating object in lua
   return {
     image = splash:png(),
@@ -168,4 +190,3 @@ function main(splash, args)
   }
 end
 ```
-
