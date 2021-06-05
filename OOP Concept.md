@@ -99,3 +99,23 @@ Access modifiers change which classes have access to other classes, methods, or 
 3. Protected: These can be accessed within the class it is defined, as well as any subclasses of that class. This essentially makes protected members private to the hierarchy in thich they are defined.
 
 ## Polymorphism
+Polymorphism describes methods that are able to take on many forms. There are two types of polymorphism:
+
+1. **Dynamic Polymorphism**: It occurs during the runtime of the program during the execution. In this case, method signature is in both a subclass and a superclass. The methods share the same name but have different implementation. 
+In this case, implementation of the subclass that the object is an instance of, overrides that of the subclass.
+
+For example, let's have a car class which implements a drive() method and then a sportscar inherits car class, and it also implements a drive() method. In this case, sportscar.drive() will implement the method of sportscar class. Similarly, car.drive() will implement the method car class.
+
+This works because the form of the method is decided based on where in the class hierarchy it is called. 
+
+The benefit of dynamic polymorphism is that it allows you to write method in superclass without having to include if-else statement to account for exactly which subclass is being used.
+
+2. **Static polymorphism**: This refers to when multiple methods with the same name but different arguments are defined in the same class. It occurs during compile-time rather than during runtime.
+
+Ways to differentiate method of the same name:
+1. Different number of parameters
+2. Different types of parameters
+3. Different order of parameters
+This is also known as **method overloading**
+
+In case of method overloading, spcial care should be given to the method parameter so that incorrect argument does not match with another form of the method.   
