@@ -82,5 +82,20 @@ This manner of only allowing the class to interact through pre-determined interf
 Abstraction allows the program to be worked on incrementally and prevents it from becoming entangled and comples. It also determine specific points of contact that can act as an interface between classes, and only worry about the implementation when coding it.
 
 ## Inheritance
+Inheritance is the principle that allows classes to derive from other classes. example
+```
+class weapon:
+    //contains method and attribute common to all weapons
+    weapon.damage
+    weapon.attach()
+```
+Now there can be two subclasses to this weapon class like sword and club, which in addition to all methods and variable of weapon class, will also have weapon.damagetype as sharp and blunt. Weapon class here is superclass.
+
+In this fashion, one can create a class hierarchy, wherin a bunch of superclass and subclasses are present. In this hierarchy, a superclass can be a subclass to it's own superclass. for example, a longsword can be a subclass of sword class, which itself is a subclass of weapon, which can be a subclass of items.
+
+Access modifiers change which classes have access to other classes, methods, or attributes. There are three modifiers:
+1. Public: these can be accessed from anywhere in your program. This includes anywhere both insider of the classe hierarchy it is defined as well as outside in the rest of the program. 
+2. Private: These can be accessed from within the same calss that the member is defined. This allows you to create multiple private members of the same name in different locations so that they do not conflict with one another.
+3. Protected: These can be accessed within the class it is defined, as well as any subclasses of that class. This essentially makes protected members private to the hierarchy in thich they are defined.
 
 ## Polymorphism
