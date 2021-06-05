@@ -39,3 +39,48 @@ class Knight:
 ```
 A knight class represents any given knight, a knight object represents only one singular knight.
 Object oriented programming helps programmers create complex programs by grouping together related data and functions
+
+There are four key concepts of object oriented programming and we will discuss each one
+
+## Encapsulation
+Encapsulation refers to bundling data with methods that can operate on that data within a class. Essentially, it is the idea of hiding data within a class, preventing anything outside that class from directly interacting with it.
+
+This does not mean that members of other classes cannot interact at all with the attributes of another object. it only means that members of other classes can interact with the attributes of another object through their class's method.
+
+In practice, one way to implement this is through **getting/setting methods**
+**Getting method**: Retrieving information
+piece.getColor(): check the color of any given chess piece from anywhere in the program without knowing the inner atributes of the object
+
+**Setting method**: Changing information
+Setting method can also be modified to ensure that the changes in the attribute is within the bounds of what is allowed. It is always a good practice to change the attributes through some method.
+
+Additionaly, you can also create some attributes that are read only by defining a getter method but not a setter method. In general, it is best to not allow external classes to directly edit an object's attributes.
+**Information Hiding** - This is very important when working on large and complex programs. Each piece should not have access to or rely on the inner workings of other sections of code.
+
+As an overview, encapsulation keeps the programmer in control of access to data and prevents the program from ending up in any strange or unwanted states
+
+## Abstraction
+Abstraction refers to only showing essential details and keeping everything else hidden. Example - In case of a car, you only need to know about:
+1. How the steering wheel steers the car
+2. How the gas and brake pedals, affect the car
+3. How much gas your car has
+
+However you dont need to concerns about:
+1. How exactly the car functions internally
+2. How engine works
+
+As long as you understand the outcome, the process is not very important to you, This idea extends to object oriented programming. The classes you create should act like your car. Users of your classes should not worry about the inner details of those classes.
+
+Modern programs are very complex to the point where multiple programmers tend to work on the program. In this case, it's best if the section that you work on is able to function without knowledge of the inner workings of your colleague's section.
+
+To achieve this, it is best to think about your program in terms of interface and implementation. The interface refers to the way sections of code can communicate with one another. This is typically done through methods that each class is able to access, however the exact implementation of these methods, or how these methods are coded, should be hidden.
+
+Taking chess as an example. Let's say that king is under check, due to which knight is unable to move. It can move only to blocks the check. In this scenario, knights should be able to get the information from the king object as to whether it is under check. This can be implemented as an interface. How king determines that it's under check, is not of importance to knight.
+
+This manner of only allowing the class to interact through pre-determined interface prevents different pieces of program to become completely entagled. If classes are entangles, then one change creates a ripple effect that causes many more changes. Creating an interface through which classes can interact ensures that piece can be individually developed.
+
+Abstraction allows the program to be worked on incrementally and prevents it from becoming entangled and comples. It also determine specific points of contact that can act as an interface between classes, and only worry about the implementation when coding it.
+
+## Inheritance
+
+## Polymorphism
