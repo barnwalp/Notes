@@ -45,33 +45,6 @@ Create the boiler plate codes
 scrapy genspider <spider_name>
 ```
 
-### Legality of scrapping websites.
-	1. Use an API if one is provided, instead of scraping data
-	2. Respect the terms of service (TOS)
-	3. Respect the rules of robots.txt
-	4. Use reasonable crawl rate i.e 1 request per 15 seconds
-	5. Identify your web scrapper with a legitimate user agent string. create a page
-	that explains what you are doing and why and link back to the page in your
-	user agent string (e.g. 'MY-BOT(+https://yoursite.com/mybot.html')')
-	6. Dont republish scrapped data or any derivate dataset wihtout verifying
-	the license of the data or without obtaining a written permission from
-	the copyright holder
-
-### robots.txt
-	1. Before a search engine visit a site, it checks robots.txt for instructions
-	```
-	User-agent: *
-	Disallow: /
-	```
-	asterisk after user-agent means that robots.txt file applies to all wev robots
-	that visit the site.
-	the slash after Disallow to not visit any pages on the site.
-	2. Syntax for using the keywords is as follow:
-	User-agent: [name of the robot the following rules applies to]
-	Disallow: [the URL path you want to block]
-	Allow: [the URL path in of a subdirectory, within a blocked parent directory, that
-	you want to unblock]
-
 ### When to not use web scrapping
 
 
@@ -199,3 +172,113 @@ function main(splash, args)
   }
 end
 ```
+
+### Legality of scrapping websites.
+	1. Use an API if one is provided, instead of scraping data
+	2. Respect the terms of service (TOS)
+	3. Respect the rules of robots.txt
+	4. Use reasonable crawl rate i.e 1 request per 15 seconds
+	5. Identify your web scrapper with a legitimate user agent string. create a page
+	that explains what you are doing and why and link back to the page in your
+	user agent string (e.g. 'MY-BOT(+https://yoursite.com/mybot.html')')
+	6. Dont republish scrapped data or any derivate dataset wihtout verifying
+	the license of the data or without obtaining a written permission from
+	the copyright holder
+
+### robots.txt
+	1. Before a search engine visit a site, it checks robots.txt for instructions
+	```
+	User-agent: *
+	Disallow: /
+	```
+	asterisk after user-agent means that robots.txt file applies to all wev robots
+	that visit the site.
+	the slash after Disallow to not visit any pages on the site.
+	2. Syntax for using the keywords is as follow:
+	User-agent: [name of the robot the following rules applies to]
+	Disallow: [the URL path you want to block]
+	Allow: [the URL path in of a subdirectory, within a blocked parent directory, that
+	you want to unblock]
+
+### Avoid getting banned-1
+#### Rate Limit Requests
+Let's say a server has set a limit of 15 request/IP within 60 seconds. 
+If you retry after this limit, server will suspect that this is not a normal user and will block the user temporarily, and in this case we will get HTTP status code 429
+Status code can be seen in the network tab --> All --> catergories/ --> Headers. you can also see retry-after variable in the same tab
+#### User-Agent
+
+#### Detection through honeypots
+websites can create hidden elements through which they can detect crawlers; these elements are invisible to the normal user but can be accessed by a crawler. Example:
+```html
+<a href='#' rel='nofollow' style='display:none'>Trap</a>
+```
+
+### Avoid getting banned-2
+#### DDOS Attack:
+scrapping can be viewed as a DDOS attack as it can concurrently scrapped the data; one way around it to provide a DOWNLOAD_DELAY = <some_number>; however it does not mean that all request will be executed in 5 seconds interval. it work as following:
+DONWLOAD_DELAY = DOWNLOAD_DELAY * RANDOM(0.5, 1.5)
+but, randomization can be disabled by changing the following flag:
+RANDOMIZE_DOWNLOAD_DELAY=FALSE
+however doing this is not recommended for large project where each page have different rate_limit_request.
+
+#### Auto throttling
+A better solution is to use auto throttle extension; which uses following throttling algorithm:
+1. spiders always start with a download delay of AUTOTHROTTLE_START_DELAY;
+2. when a response is received, the target download delay is calculated as latency / N where latency is a latency of the response, and N is AUTOTHROTTLE_TARGET_CONCURRENCY.
+3. download delay for next requests is set to the average of previous download delay and the target download delay;
+4. latencies of non-200 responses are not allowed to decrease the delay;
+5. download delay can’t become less than DOWNLOAD_DELAY or greater than AUTOTHROTTLE_MAX_DELAY
+Use: comment out DOWNLOAD_DELAY
+AUTOTHROTTLE_ENABLED=True
+
+#### HTTP Caching
+
+#### ROBOTSTXT_OBEY 
+
+#### Solution for permanent block
+1. Reboot Router
+2. Use a proxy service
+3. Crawlera (not free)
+
+however these does not always work. for example google recaptcha
+
+### Avoid getting banned - 3
+
+#### Rotating user-agent
+**changes required in middleware.py**
+```python
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+import random, logging
+
+class UserAgentRotatorMiddleware(UserAgentMiddleware):
+    user_agents_list = [
+        'agent_1',
+        'agent_2',
+        'agent_3',
+        'agent_4',
+        'agent_5',
+        'agent_6',
+        'agent_7',
+        'agent_8',
+        'agent_9',
+        'agent_10',
+    ]
+
+    def __init__(self, user_agent=''):
+        self.user_agent = user_agent
+      
+    def process_request(self, request, spider):
+        try:
+            self.user_agent = random.choice(self.user_agents_list)
+            request.headers.setdefault('User-Agent', self.user_agent)
+        except IndexError:
+            logging.error('could not fetch user_agent')
+```
+**changes required in settings.py**
+DOWNLOADER_MIDDLEWARES = {
+    # disbale default user_agent
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
+    # lower number means higher priority
+    'quotescrap.middlewares.UserAgentRotatorMiddleware': 400
+}
+
