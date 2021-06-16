@@ -1,19 +1,25 @@
 ## Custom CSS Selector
 
 ### CSS combinator (example shown using div and p)
-    - **div p** : **Descendent Selector** - select all \<p> elements nested inside of \<div> element. These \<p> elements can be nested deep inside the \<div> element.
-    - **div > p** : **Direct Child** - select all \<p> elements that are direct children (one level down) of \<div> element
-    - **div + p** : **Adjacent selector** - select the first \<p> elements that are placed immediately after \<div> element. however these elements should be on the same level. 
-    - **div ~ p** : select all \<p> elements that is preceded by a \<div> element. In this case, there can be some other element in between \<div> and \<p>.
+
+- **div p** : **Descendent Selector** - select all \<p> elements nested inside of \<div> element. These \<p> elements can be nested deep inside the \<div> element.
+- **div > p** : **Direct Child** - select all \<p> elements that are direct children (one level down) of \<div> element
+- **div + p** : **Adjacent selector** - select the first \<p> elements that are placed immediately after \<div> element. however these elements should be on the same level. 
+- **div ~ p** : select all \<p> elements that is preceded by a \<div> element. In this case, there can be some other element in between \<div> and \<p>.
 
 ### Pseudo class
 
-    - **:hover** - Matches when a user hover over an item with a pointing device, eg: holding the mouse pointer over it
-    - **:active** - Matches when an item is being activated by the user, for example clicked on
-    - **:focus** - It is generally triggered when the user clicks or taps on an element or selects it with the keyboard's Tab key
-    - **:checked** - represents any radio, checkbox or option elements that is checked or toggled on to an ON state.
-    - **:nth-of-type()** - it matches elements of a given type (tag name), based on their position among a group of siblings, 2n will select elements at even number
+- **:hover** - Matches when a user hover over an item with a pointing device, eg: holding the mouse pointer over it
+- **:active** - Matches when an item is being activated by the user, for example clicked on
+- **:focus** - It is generally triggered when the user clicks or taps on an element or selects it with the keyboard's Tab key
+- **:checked** - represents any radio, checkbox or option elements that is checked or toggled on to an ON state.
+- **:nth-of-type()** - it matches elements of a given type (tag name), based on their position among a group of siblings, 2n will select elements at even number
 
+### Pseudo elements
+
+- **::first-letter** - it applies styles to the first letter of the first line of a block-level element, but only when not preceded by other content (such as images or inline tables) 
+- **::first-line** - applies styles to the first line of a block-level element
+- **::selection** - applies styles to the part of a document that has been highlighted by the user
 ### selecting an element through an attribute
     `response.css('[itemprop="author"]::text').get()`
 
