@@ -20,6 +20,21 @@
 - **::first-letter** - it applies styles to the first letter of the first line of a block-level element, but only when not preceded by other content (such as images or inline tables) 
 - **::first-line** - applies styles to the first line of a block-level element
 - **::selection** - applies styles to the part of a document that has been highlighted by the user
+
+### Specificity
+it is how a browser decides which rule to apply when multiple rules are applied to the same element. it is a measure how specific a given selector is. The more specific selector wins. eg ID > class > element
+
+Counting specificity score:
+
+| ID selector | Class, attribute & Pseudo class selector | Elements and Pseudo element selector | Total Score |
+| ----------- | ---------------------------------------- | ------------------------------------ | ----------- |
+|     0       |                   0                      |                  0                   |       0     |
+
+it means that class is 10 times more specific than elements and similarly ID is 10 times more specific than class. 
+
+When Important rule is applied to a style declaration, this declaration overrides any other declaration.
+
+
 ### selecting an element through an attribute
     `response.css('[itemprop="author"]::text').get()`
 
