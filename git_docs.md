@@ -64,3 +64,16 @@ git push -u origin feature-readme-instructions
 # deleting a branch
 git branch -d <branch_name>
 ```
+
+### Merge Conflicts
+Let us make a new branch quick-test and change to this branch
+```bash
+git checkout quick-test
+
+# lets us assume that both branches 'master' and 'quick-test' have made changes
+# in same line of a same file; which will show in diff
+git diff master
+
+# Now if you try to merge, it will cause conflict; best way to resolve merge conflict
+# is to do it in GUI app such as vs codeby pulling the master or quick-test branch
+```
