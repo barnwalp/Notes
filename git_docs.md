@@ -3,7 +3,7 @@
 2. staging area - a hidden area, which either have the code that is in production or the next code that will be pushed to production. After committing, staging area does not become empty.
 3. Repositories - hidden subdirectory in the project directory.
 
-
+### Basic Git Command
 ```bash
 # Shows a better short version of git status
 git status -s
@@ -32,4 +32,35 @@ git restore --staged file1.js
 # Restoring a file to an earlier version (one step back)
 git restore --source=HEAD~1 <filepath>
 git restore --source=HEAD~1 file1.js
+```
+
+### Git Branch
+
+```bash
+# Checking the available branches of a repo
+git branch
+
+# Creating a new branch
+git checkout -b <branch_name>
+git checkout -b feature-readme-instuctions
+
+# Changing to another branch
+git checkout feature-readme-instructions
+
+# Checking the difference in master and another branch
+# first, checkout to the master branch, and then check using
+git diff <branch_name>
+git diff feature-readme-instructions
+
+# When you commit a change in the new branch, first thing
+# that needs to be done is to push the code in the repo in new branch
+git push -u origin <branch_name>
+git push -u origin feature-readme-instructions
+
+# once the changes made in the new branch, is pushed to the repo
+# pull request need to be made, which can be done from the github site also.
+# after pull request, codes can be merged by the admin.
+
+# deleting a branch
+git branch -d <branch_name>
 ```
